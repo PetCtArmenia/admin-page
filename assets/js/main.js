@@ -23,7 +23,7 @@ let id = window.location.href.split("id=");
 id = id[id.length - 1];
 
 //var htmlRootFolderPath = "http://"+ document.location.hostname + "/petct-armenia/admin-page/html";
-var htmlRootFolderPath = "https://petctarmenia.github.io/admin-page/html";
+const htmlRootFolderPath = "https://petctarmenia.github.io/admin-page/html";
 
 if (localStorage.getItem('appname_token')) {
 $.noConflict();
