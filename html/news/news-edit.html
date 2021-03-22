@@ -1,0 +1,303 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>PET/CT Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="./images/logo.png">
+    <link rel="shortcut icon" href="./images/logo.png">
+
+    <link rel="stylesheet" href="./assets/css/lib/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/news.css">
+</head>
+
+<body>
+
+    <div id="image-modal">
+        <i class="fa fa-times close"></i>
+
+        <img alt="">
+    </div>
+
+    <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-expand-sm navbar-default">
+            <div id="main-menu" class="main-menu collapse navbar-collapse"></div>
+        </nav>
+    </aside>
+
+    <div id="right-panel" class="right-panel">
+        <header id="header" class="header"></header>
+
+        <div class="breadcrumbs">
+            <div class="breadcrumbs-inner">
+                <div class="row m-0">
+                    <div class="col-sm-4">
+                        <div class="page-header float-left">
+                            <div class="page-title">
+                                <h1> <a href="news.html">Նորություններ</a> > Տեքս</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content pb-0">
+            
+            <div id="more_see_conainer" class="pb-2"></div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title" id="content-title">Փոխել</strong>
+                        </div>
+
+                        <div class="card-body">
+                            
+                            <div class="alert alert-success" id="news-success-alert" role="alert"></div>
+                            <div class="alert alert-danger" id="news-danger-alert" role="alert"></div>
+
+                            <div class="loader-image-container">
+                                <img src="./images/loading.gif">
+                            </div>
+
+                            <form id="editing-form" enctype="multipart/form-data"></form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="clearfix"></div>
+        
+        <footer class="site-footer"></footer>
+    </div>
+
+    <script src="./assets/js/lib/jQuery/jquery-3.5.1.js"></script>
+    <script src="./assets/js/lib/jQuery/jquery.min.js"></script>
+    <script src="./assets/js/lib/popper/popper.min.js"></script>
+    <script src="./assets/js/lib/bootstrap/bootstrap.min.js"></script>
+    <script src="./assets/js/lib/jQuery/jquery.matchHeight.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/lib/ckeditor/ckeditor.js"></script>
+
+    <script>
+        var id = window.location.href.split("id=");
+        id = id[id.length - 1];
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('GET', 'http://localhost/petct-armenia/website/petct-back/public/api/admin/news-more/'+id);
+
+        xhr.responseType = 'json';
+
+        xhr.send();
+        
+        xhr.onload = function() {
+            var res = xhr.response;
+
+            document.getElementsByClassName("loader-image-container")[0].remove();
+            document.getElementById("editing-form").style.display = "block";
+
+            $("#more_see_conainer").append(`
+                <a href="news-more.html?id=${res.news.id}" class="btn btn-info">Դիտել ավելին</a>
+            `);
+
+            document.getElementById("editing-form").innerHTML += `
+                                <div class="form-group">
+                                    <label>Վերնագիր <span class="mandatory_star">*</span></label>
+                                    <input class="form-control" value="${res.news.title}" id="title-inp">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="image-in">Նկար</label>
+                                    <input type="file" name="img" accept="image/gif, image/jpeg, image/png" class="form-control-file" id="image-inp">
+                                    <div>
+                                        <small>Ընդունված ֆայլի ձևաչափեր${'`'} gif, png, jpeg</small>
+                                    </div>
+                                    <img id="default-image" 
+                                    src="http://localhost/petct-armenia/website/petct-front/img/blog/${res.news.img}" style="width: 150px; height: 150px; margin-top: 20px;cursor: pointer;">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Հակիրճ Նկարագրություն <span class="mandatory_star">*</span></label>
+                                    <div id="editor">${res.news.short_description}</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Ամողջական Նկարագրություն <span class="mandatory_star">*</span></label>
+                                    <div id="editor-2">${res.news.full_description}</div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Ամսաթիվ</label>
+                                    <input type="date" id="date" value="${res.news.date}" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Ընրեք թեգեր</label>
+                                    <ul class="list" id="tag_list_container"></ul>
+                                </div>
+
+                                <div class="form-group">
+                                    <button class="btn btn-success">Հաստատել</button>
+                                    
+                                    <img src="./images/loading.gif" id="wait_loader" style="width: 50px;display: none;">
+                                </div>
+            `;
+
+            var ckeditorText;
+            var ckeditorText2;
+
+            ClassicEditor.create( document.querySelector( '#editor' ) )
+            .then(editor => {
+                ckeditorText = editor;
+            }).catch( error => {
+                console.error( error );
+            });
+
+            ClassicEditor.create( document.querySelector( '#editor-2' ) )
+            .then(editor => {
+                ckeditorText2 = editor;
+            }).catch( error => {
+                console.error( error );
+            });
+
+            document.getElementById("image-inp").addEventListener('change', function() {
+                var reader = new FileReader();
+
+                reader.onload = (e) => {
+                    document.getElementById("default-image").src = e.target.result; 
+                }
+
+                reader.readAsDataURL(this.files[0]); 
+            });
+
+            document.getElementById('default-image').addEventListener('click', function () {
+                document.getElementById("image-modal").style.display = "block";
+                document.getElementById("image-modal").getElementsByTagName("img")[0].src = this.src;
+            });
+            
+            document.getElementById("image-modal").getElementsByClassName('close')[0].addEventListener('click', function () {
+                document.getElementById("image-modal").style.display = "none";
+            });
+
+            var uploadForm = document.getElementById("editing-form");
+
+            uploadForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                document.getElementById("wait_loader").style.display = "block";
+                document.getElementsByClassName("btn-success")[0].style.display = "none";
+
+                var tags = "";
+            
+                if ($("#tag_list_container li span.active-tag").length == 0) {
+                    tags = "empty";
+                } else {
+                    tags = [];
+
+                    for (var t = 0; t < $("#tag_list_container li span.active-tag").length; t++) {
+                        tags.push($("#tag_list_container li span.active-tag").eq(t).attr("data-id"));
+                    }
+                }
+
+                var formData = new FormData(this);
+                    formData.append('title', document.getElementById("title-inp").value);
+                    formData.append('img', document.getElementById("image-inp").value);
+                    formData.append('short_description', ckeditorText.getData());
+                    formData.append('full_description', ckeditorText2.getData());
+                    formData.append('date', document.getElementById('date').value);
+                    formData.append('tags', tags);
+
+                    $.ajax({
+                        type:'POST',
+                        url: 'http://localhost/petct-armenia/website/petct-back/public/api/admin/news-edit/'+id,
+                        data: formData,
+                        cache:false,
+                        contentType: false,
+                        processData: false,
+                        success: (data) => {
+                            
+                            document.getElementById("wait_loader").style.display = "none";
+                            document.getElementsByClassName("btn-success")[0].style.display = "block";
+
+                            if (data.status === "Success") {
+                                document.getElementById("news-success-alert").style.display = "block";
+                                document.getElementById("news-danger-alert").style.display = "none";
+                                document.getElementById("news-success-alert").innerText = "Փոփոխությունը կատարվել է հաջողությամբ";
+
+                                setTimeout(function () {
+                                    document.querySelector('html').scrollTop = 0;
+                                
+                                    setTimeout(function () {
+                                        document.getElementById("news-success-alert").style.display = "none";
+                                    }, 2000);
+                                }, 500);
+                            } else {
+                                document.getElementById("news-danger-alert").innerHTML = '';
+
+                                setTimeout(function () {
+                                    document.querySelector('html').scrollTop = 0;
+                                }, 500);
+
+                                document.getElementById("news-danger-alert").style.display = "block";
+                                document.getElementById("news-danger-alert").innerHTML += `<ul>
+                                        ${data.title                         !== undefined   ? '<li>'+data.title+'</li>' : ''}
+                                        ${data.img                           !== undefined   ? '<li>'+data.img+'</li>' : ''}
+                                        ${data.short_description             !== undefined   ? '<li>'+data.short_description+'</li>' : ''}
+                                        ${data.full_description              !== undefined   ? '<li>'+data.full_description+'</li>' : ''}
+                                        ${data.date                          !== undefined   ? '<li>'+data.date+'</li>' : ''}
+                                        ${data.lang_id                       !== undefined   ? '<li>'+data.lang_id+'</li>' : ''}
+                                    </ul>`;
+                            }
+                        },
+                        error: function(data){
+                            console.log(data);
+                        }
+                    })
+            });
+
+            function getTags () {
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('GET', 'http://localhost/petct-armenia/website/petct-back/public/api/admin/get-news-tags/'+res.news.id);
+
+                xhr.responseType = 'json';
+
+                xhr.send();
+
+                xhr.onload = function() {
+                    var res = xhr.response;
+
+                    for (var i = 0; i < res.length; i++) {
+                        document.getElementById("tag_list_container").innerHTML += `
+                            <li>
+                                <span data-id="${res[i].id}" 
+                                class="${res[i].status ? "active-tag" : ""}">${res[i].name}</span>
+                            </li>
+                        `;
+                    }
+
+                    $("#tag_list_container li span").on("click", function () {
+                        if ($(this).hasClass("active-tag")) {
+                            $(this).removeClass("active-tag");
+                        } else {
+                            $(this).addClass("active-tag");
+                        }
+                    });
+                }
+            }
+
+            getTags();
+        };
+
+    </script>
+</body>
+</html>

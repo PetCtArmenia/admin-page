@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="../../assets/css/login.css">
+    
+    <link rel="apple-touch-icon" href="../../images/logo.png">
+    <link rel="shortcut icon" href="../../images/logo.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+
+    <title>Pet/Ct Armenia Login Page</title>
+</head>
+<body>
+
+    <div class="login">
+        <div class="login-triangle"></div>
+        
+        <h2 class="login-header">
+            <a href="http://petct-armenia.am" target="_blank">petct-armenia.am</a>
+        </h2>
+      
+        <form class="login-container" id="submit_form">
+            <span id="wrong_error"></span>
+            
+            <p>
+              <input id="login" placeholder="Մուտքանուն *">
+              <span id="login_error"></span>
+            </p>
+
+            <p>
+                <i class="fa fa-eye-slash icon"></i>
+
+                <input type="password" id="password" placeholder="Գաղտնաբառ *">
+                <span id="password_error"></span>
+            </p>
+
+            <p>
+                <img src="../../images/loading.gif" id="img_id" />
+
+                <input type="submit" id="submit_btn" value="Մուտք">
+            </p>
+
+        </form>
+    </div>
+
+    <script src="../../assets/js/login.js"></script>
+    
+</body>
+</html>

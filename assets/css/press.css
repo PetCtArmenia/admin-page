@@ -1,0 +1,48 @@
+.loader-press img {
+    width: 80px;
+}
+
+.default-image {
+    width: 100px;
+    cursor: pointer;
+}
+
+#image-modal {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(26,26,26,.9);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: none;
+}
+
+#image-modal .close {
+    font-size: 30px;
+    position: absolute;
+    right: 50px;
+    top: 30px;
+    color: #3face4;
+    cursor: pointer;
+}
+
+#image-modal img {
+    width: 700px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#editing-form {
+    display: none;
+}
+
+#press-edit-success-alert, #press-edit-danger-alert {
+    display: none;
+}
+
+#press_deleted_message {
+    display: none;
+}

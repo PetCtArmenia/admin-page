@@ -1,0 +1,132 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>PET/CT Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="../../images/logo.png">
+    <link rel="shortcut icon" href="../../images/logo.png">
+
+    <link rel="stylesheet" href="../../assets/css/lib/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/news.css">
+
+</head>
+
+<body>
+
+    <div id="image-modal">
+        <i class="fa fa-times close"></i>
+
+        <img />
+    </div>
+
+    <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-expand-sm navbar-default">
+            <div id="main-menu" class="main-menu collapse navbar-collapse"></div>
+        </nav>
+    </aside>
+
+    <div id="right-panel" class="right-panel">
+        <header id="header" class="header"></header>
+        
+        <div class="breadcrumbs">
+            <div class="breadcrumbs-inner">
+                <div class="row m-0">
+                    <div class="col-sm-4">
+                        <div class="page-header float-left">
+                            <div class="page-title">
+                                <h1>Նորություններ</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content pb-0">
+            <div class="alert alert-success" role="alert" id="news_deleted_message">
+                Տվյալը ջնջվել է հաջողությամբ
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Նորություններ</strong>
+                        </div>
+
+                        <div class="card-body">
+                            <a href="add-news" class="btn btn-primary mb-3">Ավելացնել +</a>
+
+                            <div class="alert alert-success" id="news-success-alert" role="alert"></div>
+                            <div class="alert alert-danger" id="news-danger-alert" role="alert"></div>
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Վերնագիր</th>
+                                        <th scope="col">Նկար</th>
+                                        <th scope="col">Լեզու</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="news-table"></tbody>
+                            </table>
+
+                            <div class="loader-image-container">
+                                <img src="../../images/loading.gif">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Թեգեր</strong>
+                        </div>
+
+                        <div class="card-body">
+                            <a href="add-tag" class="btn btn-primary mb-3">Ավելացնել +</a>
+
+                            <div class="alert alert-success" id="news-success-alert" role="alert"></div>
+                            <div class="alert alert-danger" id="news-danger-alert" role="alert"></div>
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Անուն</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="tags-table"></tbody>
+                            </table>
+
+                            <div class="loader-image-container">
+                                <img src="../../images/loading.gif">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <div class="clearfix"></div>
+        
+        <footer class="site-footer"></footer>
+    </div>
+
+    <script src="../../assets/js/lib/jQuery/jquery.min.js"></script>
+    <script src="../../assets/js/lib/popper/popper.min.js"></script>
+    <script src="../../assets/js/lib/bootstrap/bootstrap.min.js"></script>
+    <script src="../../assets/js/lib/jQuery/jquery.matchHeight.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/news.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+.loader-image-container img {
+    width: 100px;
+}
+
+#advantages-success-alert, #advantages-danger-alert, #editing-form{
+    display: none;
+}

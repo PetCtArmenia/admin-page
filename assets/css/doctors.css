@@ -1,0 +1,7 @@
+#editing-form {
+    display: none;
+}
+
+#doctors-edit-success-alert, #doctors-edit-danger-alert {
+    display: none;
+}

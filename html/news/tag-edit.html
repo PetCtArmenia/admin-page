@@ -1,0 +1,82 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>PET/CT Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="../../images/logo.png">
+    <link rel="shortcut icon" href="../../images/logo.png">
+
+    <link rel="stylesheet" href="../../assets/css/lib/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/tags.css">
+</head>
+
+<body>
+
+    <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-expand-sm navbar-default">
+            <div id="main-menu" class="main-menu collapse navbar-collapse"></div>
+        </nav>
+    </aside>
+
+    <div id="right-panel" class="right-panel">
+        <header id="header" class="header"></header>
+
+        <div class="breadcrumbs">
+            <div class="breadcrumbs-inner">
+                <div class="row m-0">
+                    <div class="col-sm-4">
+                        <div class="page-header float-left">
+                            <div class="page-title">
+                                <h1> <a href="news">Թեգեր</a> > Փոխել</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content pb-0">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="alert alert-success" id="tags-success-alert" role="alert"></div>
+                            <div class="alert alert-danger" id="tags-danger-alert" role="alert"></div>
+
+                            <form id="editing-form"> 
+                                <div class="form-group">
+                                    <label>Անվանում <span class="mandatory_star">*</span></label>
+                                    <input id="name-inp" class="form-control">
+                                    <small>Առավելագույն սիմվոլների քանակը` 30</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="button" onclick="change()" class="btn btn-primary">Հաստատել</button>
+                                    <img src="../../images/loading.gif" id="wait_loader" style="width: 50px;display: none;">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="clearfix"></div>
+        
+        <footer class="site-footer"></footer>
+    </div>
+
+    <script src="../../assets/js/lib/jQuery/jquery.min.js"></script>
+    <script src="../../assets/js/lib/bootstrap/bootstrap.min.js"></script>
+    <script src="../../assets/js/lib/jQuery/jquery.matchHeight.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/news.js"></script>
+    
+</body>
+</html>

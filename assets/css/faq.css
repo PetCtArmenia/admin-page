@@ -1,0 +1,11 @@
+#editing-form, #faq-edit-success-alert, #faq-edit-danger-alert{
+    display: none;
+}
+
+#faq_deleted_message {
+    display: none;
+}
+
+.loader-image-container img {
+    width: 100px;
+}
